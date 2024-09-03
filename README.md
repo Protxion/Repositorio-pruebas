@@ -1,4 +1,20 @@
 
+# Comandos de linux 
+ - cd -> Es para pocisionarnos en una carpeta o salir de cualquiera de ellas
+ - ls -> Es para mostrar los archivos o carpetas que hay dentro de un directorio/carpeta
+ - rm -> Es para eliminar carpetas/archivos
+ - bash -> Nos permite iniciar instancias o ejecutar scripts
+ - clear -> Limpia la consola
+ - mkdir -> Crea un nuevo directorio
+ - wget -> nos permite descargar archivos
+ - unzip -> nos permite descomprimir archivos .zip
+ - -h -> nos muestra todos los comandos
+## Pip 
+ - nos permite instalar o desinstalar paquetes de python
+ - -r -> nos permite intstalar requerimientos/dependencias
+## Python
+ - nos permite ejecutar el interprete de python
+ - -h -> nos muestra todos los comandos
 # Clase de teoria hacking etico dia 2 30/08/2024
 ## Teoria
 En el curso vimos las diferentes metodologias que se van a tratar, 
@@ -44,7 +60,7 @@ el como realizar un informe de hacking etico.
  - filetype
  - ""
  - ext
-### Ejemplos
+### Ejemplos de Dorking
  - site:Udemy.com filetype:PDF
  - "index of"/"chat/logs"
  - filetype:txt
@@ -54,7 +70,7 @@ el como realizar un informe de hacking etico.
 ### Links para mas dorks y ayudas
  - https://gist.github.com/zachbrowne/489762a6852abb24f9e3
  - https://www.exploit-db.com/google-hacking-database
-### Comandos Principales
+### Comandos Principales de Dorks
 
  - define:término - Se muestran definiciones procedentes de páginas web para el término buscado.
 
@@ -104,7 +120,7 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
 ## Shodan
  - Es otra herramienta/Buscador que nos permite la recoleccion pasiva de informacion accediendo directamente a puertos abiertos con procesos corriendo, revisando directamente sus vulnerabilidades, si podemos acceder a ellas de manera sencilla o si no, por defecto shodan intenta hacer login, nos muestra los puertos abiertos con servicios corriendo, nos ofrece un apartado para desarrolladores en la que expone una API en la que podemos realizar consultas con diferentes lenguajes de programacion.
  - Es distinta a google dorks ya que las consultas van sobre banners que nos devuelven los diferentes servicios al hacerle una peticion a un puerto, seremos capaces de encontrar cualquier tipo de sistema que tenga puertos abiertos y que tenga procesos corriendo en ellos. camaras, refrigeradores, cualquier cosa conectada a internet. con ciertos comandos podemos dirigir las consultas hacia un objetivo.
-## Comandos vistos en clase
+## Comandos Shodan
 ### Ftp 
  - cuando contiene el banner esa palabra es probable que en ese puerto este corriendo el servicio ftp *FTP = puerto 21*
 #### FTP Definicion
@@ -121,9 +137,9 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  - "Server: yawcam" "Mime-Type: text/html" -> Nos permite ver webcams que tengan el software yawcam
  - ("webcam 7" OR "webcamXP") http.component:"mootools" -401 -> Nos permite ver webcams con el software webcamxp no nos permite abrirlos
  - "Server: IP Webcam Server" "200 OK" -> Nos permite ver webcams que tengan el software ip webcam
-## Links para mas Comandos y ayudas
+## Links para mas Comandos de Shondan
  - https://github.com/jakejarvis/awesome-shodan-queries
-## Comandos Principales
+## Comandos Principales de Shodan
  - After: Only show results after the given date (dd/mm/yyyy) string
 
  - Asn: Autonomous system number string
@@ -178,4 +194,47 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
 ## Archive.org
  - Nos pérmite revisar los registros historicos de las paginas, por snapshots, la pagina trata de recrear la pagina web tal y como existio en el momento en el que lo selecciones.
 ### Como usar
- - En el buscador bsucar archive.org
+ - En el buscador bsucar archive.org - luego buscar la url que quieras ver
+## Cencys
+ - Escanea internet todos los dias con zmap - hace indexaciones diferentes a la sque se pueden lograr con shodan, se puede acceder a distintos resultados y por zmap a resultados mas recientes
+### Como usar
+ - https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=ftp
+# Clase practica dia 3 3/09/2024
+## The harvester
+ - Nos petmite automatizar la busqueda, que realizamos anteriormente con google, con shodan y con censys al escribir el dominio del target y el realizar automaticamente las consultas
+### Comandos theHarvester
+ - -h, este comando nos muestra todos los comandos de theHarvester
+ - -d, Aca ponemos el dominio de nuestro objetivo
+ - -b, Aca colocamos los buscadores que queremos usar, separando con *,* podemos usar varios buscadores
+ - -l, Aca son la cantidad de consultas que queremos que realice, *IMPORTANTE* -> Colocar un limite para que no se nos banee la ip por tanta consulta
+ - -f nos permite volcar los resultados obtenidos a un fichero
+#### Ejemplos
+ - theHarvester -d microsoft.com -b baidu -l 100
+ - theHarvester -d microsoft.com -b baidu,yahoo,duckduckgo,bing -l 100
+ - theHarvester -d microsoft.com -b baidu,yahoo,duckduckgo,bing -l 100 -f resultados
+### Links y ayudas
+ - https://github.com/laramies/theHarvester
+ - Se accede por la terminal de kali linux con el comando *theHarvester -h*.
+## Miniconda 
+ - Instalamos una version antigua de theHarvester, la cual instalamos en kali linx creando un entorno virtual con miniconda, configuramos el entorno para poder acceder a la version antigua de theHarvester junto con las dependencias de python 3.8.0 sin que interfieran con los demas programas que tengamos instalados.
+ ### Comandos Miniconda
+ - conda config --set
+ - conda create -n "" python=Version
+ - conda Activate
+ - conda desactivate
+ ### Links para la descarga
+ - https://docs.anaconda.com/miniconda/
+ - https://github.com/laramies/theHarvester/releases?page=2 
+### Como acceder
+ - Podemos acceder a este entorno virtual desde la terminal con los siguientes comandos 
+ - *cd* -> A la carpeta donde creamos el entorno  
+ - *conda activate Old_Harvester* -> Para activar el conda 
+ - *conda desactivate* -> Para desactivar el conda
+ - *cd* -> A la carpeta del theHarvester
+ - python theHarvester.py -> para empezar a usarlo
+### Ejemplos de comandos theHarvester antiguo vistos
+ - python theHarvester.py -d microsoft.com -b google -l 100 -f Resultados2
+ - python theHarvester.py -d microsoft.com -b trello -l 100 -f Resultados2
+ 
+
+ 
