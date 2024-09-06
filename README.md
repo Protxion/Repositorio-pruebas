@@ -1,5 +1,50 @@
+# Kali linux 
+ - Kali Linux es una distribución de Linux basada en Debian diseñada específicamente para pruebas de penetración, análisis forense digital, y seguridad informática. Es mantenida y desarrollada por Offensive Security, y es ampliamente utilizada por profesionales de ciberseguridad, investigadores, y entusiastas para evaluar la seguridad de sistemas y redes.
+## Características de Kali Linux:
+ - Amplia Colección de Herramientas de Seguridad: Kali Linux viene preinstalado con cientos de herramientas para realizar pruebas de penetración, auditorías de seguridad, análisis forense, ingeniería inversa, y más. Algunas de las herramientas más conocidas incluidas son:
+### Nmap: 
+ - Escáner de red.
+### Metasploit Framework: 
+ - Plataforma de desarrollo de exploits.
+### Wireshark: 
+ - Analizador de tráfico de red.
+### John the Ripper: 
+ - Herramienta de cracking de contraseñas.
+### Aircrack-ng: 
+ - Suite de herramientas para evaluar la seguridad de redes inalámbricas.
+### Actualizaciones y Repositorios de Seguridad: 
+ - Kali Linux es conocido por sus actualizaciones frecuentes y su acceso a repositorios de software específicamente ajustados para ciberseguridad. Las actualizaciones aseguran que las herramientas sean las versiones más recientes y estables.
 
+### Modos de Instalación Flexibles:
+ - Kali Linux puede ejecutarse de varias maneras:
+
+### Modo en Vivo (Live): 
+ - Arranque desde un USB o DVD sin necesidad de instalarlo en el disco duro.
+### Instalación Completa: 
+ - Instalación estándar en el disco duro.
+### Máquinas Virtuales: 
+ - Disponible como imagen para herramientas de virtualización como VMware y VirtualBox.
+### Subsistema de Windows para Linux (WSL): 
+ - Ejecutar Kali dentro de Windows.
+### Soporte para Plataformas Múltiples: 
+ - Además de las arquitecturas x86 y x64, Kali Linux también es compatible con ARM (como Raspberry Pi), lo que permite realizar pruebas de seguridad en dispositivos más pequeños o integrados.
+
+### Alta Personalización y Facilidad de Uso: 
+ - Kali Linux es altamente personalizable y ofrece diferentes entornos de escritorio, como GNOME, KDE, Xfce, y otros. También se pueden crear imágenes personalizadas con las herramientas específicas necesarias para ciertas pruebas.
+
+### Entornos Seguros de Desarrollo y Pruebas: 
+ - Kali Linux incluye características como la posibilidad de ejecutar en modo "rootless" (sin superusuario) para aumentar la seguridad, lo que permite a los usuarios realizar pruebas de penetración en entornos más controlados.
+
+### Documentación y Comunidad Activa:
+ - Kali Linux está bien documentado y cuenta con una comunidad activa de usuarios y desarrolladores. Hay manuales, tutoriales, y cursos (como los de Offensive Security) que ayudan a los usuarios a aprender a usar las herramientas y técnicas de hacking ético.
+
+### Aplicaciones de Kali Linux:
+ - Pruebas de Penetración: Usado por pentesters para identificar y explotar vulnerabilidades en sistemas y aplicaciones.
+Análisis Forense Digital: Herramientas incluidas en Kali permiten analizar discos duros, recuperar datos eliminados, y realizar investigaciones de seguridad.
+Investigación en Ciberseguridad: Utilizado por investigadores de seguridad para estudiar amenazas, malware y técnicas de hacking.
+Aprendizaje y Educación: Amplia base de uso en cursos de seguridad informática y hacking ético.
 # Comandos de linux 
+ - La tecla *TAB* nos permite ver los comandos que podemos usar
  - cd -> Es para pocisionarnos en una carpeta o salir de cualquiera de ellas
  - ls -> Es para mostrar los archivos o carpetas que hay dentro de un directorio/carpeta
  - rm -> Es para eliminar carpetas/archivos
@@ -9,6 +54,11 @@
  - wget -> nos permite descargar archivos
  - unzip -> nos permite descomprimir archivos .zip
  - -h -> nos muestra todos los comandos
+## Sudo
+ - Permite utilizar comandos en modo superusuario
+ - Apt -> Simplifica tareas comunes como la instalación, actualización y eliminación de paquetes de software
+ - update -> Permite actualizar la lista de paquetes
+ - remove -> Permite desinstalar una app
 ## Pip 
  - nos permite instalar o desinstalar paquetes de python
  - -r -> nos permite intstalar requerimientos/dependencias
@@ -17,7 +67,7 @@
  - -h -> nos muestra todos los comandos
 # Clase de teoria hacking etico dia 2 30/08/2024
 ## Teoria
-En el curso vimos las diferentes metodologias que se van a tratar, 
+ - En el curso vimos las diferentes metodologias que se van a tratar, 
 tambien ciertos aspectos a tratar referentes a contratos, el como vamos a proceder al recibir la aprobacion por el cliente,
 el como realizar un informe de hacking etico.
 ### Metodologias
@@ -235,6 +285,27 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
 ### Ejemplos de comandos theHarvester antiguo vistos
  - python theHarvester.py -d microsoft.com -b google -l 100 -f Resultados2
  - python theHarvester.py -d microsoft.com -b trello -l 100 -f Resultados2
- 
-
- 
+# Clase practica dia 4 04/09/2024
+## Maltego
+ - nos proporciona mas flexibilidad que theHarvester, para maltego todas las consultas que hagan una query a una base de datos va a generar comandos que nos van a permitir obtener esa info, podemos recrear relaciones que hay entre un objetivo y personas correos nuemros de telefono, redes sociales, y cuallquier informacion que tengamos, permitiendonos obtener datos especificos con transformadores y asi obtener toda la informacion requerida de una persona u/o empresa
+# Clase practica dia 5 6/09/2024
+## Recon-ng
+ - esta app nos permite automatizar la busqueda de informacion por consultas a dominios, utiliza modulos muy parecido a lo anteriormente visto en maltego con los transformadores, tenemos que instalar modulos desde el lugar denominado por recon-ng como marketplace, para instalar los modulos usaremos comandos *marketplace search* -> *marketplace info* -> *marketplace install*. para usar un modulo usaremos los comandos *modules search* -> *marketplace load "El modulo"*, al ingresar el comando *options list* nos permite ver los datos que tenemos que poner a la hora de cargar uno de los modulos ejemplos, *SOURCE "Dominio"*, *CREATOR "Nombre del archivio"* , tambien tenemos modulos que nos permiten visualizar los datos de una manera muy amigable en la parte final del *marketplace search*
+### Comandos 
+ - help
+ - modules
+ - marketplace
+ - search
+ - info
+ - install
+ - options
+ - run
+ - show
+ - keys
+ - add
+ - back
+### recon/domains-contacts/whois_pocs
+ - Este es uno de los modulos de whois, trabajados durante el curso para iniciarlo sus comandos son *options set SOURCE "Dominio"* ahora si mostramos la informacion *info* ya el modulo tiene cargado el dominio anteriormente puesto para correr este modulo se usa el comando *run*. si este modulo encuentra informacion, en concreto contactos relacionados al dominio previamente buscado se guardaran en la tabla 'contacts' para acceder a esta carpeta en este caso es con el comando *show "Nombre de la carpeta"*
+### recon/companies-multi/shodan.org
+ - Este es uno de los modulos de shodan, trabajados es clase para iniciarlo sus comandos son *options set SOURCE "Dominio"* ahora si mostramos la informacion *info* ya el modulo tiene cargado el dominio anteriormente puesto para correr este modulo se usa el comando *run*.
+# Fin de las clases de recoleccion de informacion de manera pasiva
