@@ -309,3 +309,14 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
 ### recon/companies-multi/shodan.org
  - Este es uno de los modulos de shodan, trabajados es clase para iniciarlo sus comandos son *options set SOURCE "Dominio"* ahora si mostramos la informacion *info* ya el modulo tiene cargado el dominio anteriormente puesto para correr este modulo se usa el comando *run*.
 # Fin de las clases de recoleccion de informacion de manera pasiva
+# Clase teorica/practica 7 09/09/2024
+## Recoleccion pasivo/activa de informacion
+ - Recoleccion de informacion sobhre un objetivo determinado utilizando metodos que se asimilen al trafico de red y comportamiento normal que suele recibir
+### Dentro de el alcance se encuentran actividades como 
+ - Consultas a servidores dns 
+ - Acceso a recursos internos de las aplicaciones web
+ - Analisis de metadatos de documentos
+## Quedan fuera las actividades con comportamiento anomalo
+## Foca analisis de metadados
+ -  foca elevenpath site: github
+ - Foca es un software que nos permite escannear archivos para conocer su metadata si tiene virus, tambien nos permite utomatizar la bsuqueda de informacion pasiva mediante google dorks, permitiendonos asi buscar informacion de forma pasiva de un objetivo y usarla para conocer contraserñas, correos, numeros de telefono, etc, es una herramienta crucial ya que permite la extraccion completa de metadatos de los archivos
