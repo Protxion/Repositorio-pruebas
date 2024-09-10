@@ -319,4 +319,33 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
 ## Quedan fuera las actividades con comportamiento anomalo
 ## Foca analisis de metadados
  -  foca elevenpath site: github
- - Foca es un software que nos permite escannear archivos para conocer su metadata si tiene virus, tambien nos permite utomatizar la bsuqueda de informacion pasiva mediante google dorks, permitiendonos asi buscar informacion de forma pasiva de un objetivo y usarla para conocer contraserñas, correos, numeros de telefono, etc, es una herramienta crucial ya que permite la extraccion completa de metadatos de los archivos
+ - Foca es un software que nos permite escannear archivos para conocer su metadata si tiene virus, tambien nos permite utomatizar la bsuqueda de informacion pasiva mediante google dorks, permitiendonos asi buscar informacion de forma pasiva de un objetivo y usarla para conocer contraserñas, correos, numeros de telefono, etc, es una herramienta crucial ya que permite la extraccion completa de metadatos de los archivos, foca solo se puede correr en windows.
+# Clase teorica /parctica dia 8 10/09/2024
+## Otros usos de los metadatos
+### Metagoofile
+ - Otra herramienta que nos permite la extraccion de metadatos no tiene actualizaciones hace 8 años, es una aplciacion que nos sirve para los mismos usos que foca solo que un poco mas rudimentaria, y que solo nos permite consultar en google, y la corremos desde la consola de kali linux, dependemos de la herramienta exiftool para la extraccion de los metadatos con esta herramienta.
+### Metashield analyzer
+ - Esta es otra de las herramientas que tenemos disponibles para la extraccion de metadata de archivos, la diferencia con las otras es que esta es una app web.
+### Protocolo DNS (Domain Name System)
+ - Realiza una traduccion de nombres de dominio a direcciones ip
+ - Corresponde con uno de los protocolos mas importantes de internet
+ - Nos permite optener informacion publica sobre un dominio u organizacion
+ - Descubrir relaciones entre dominios y hosts
+ - tecniccas de explotacion especificas para ganar acceso
+ - DNS Zone = agrupacion de registros (datos) DNS
+ - Las DNS Zones contienen diferentes tipos de registros
+### Registros
+
+| Tipo  | Significado               | Valor                       |
+|-------|---------------------------|-----------------------------|
+| SOA   | Start of authority        | Parametros para esta        |
+| A/AAA | Direccion ip de un host   | 32 Bits                     |
+| MX    | Mail Exchange             | Dominio para correo         |
+| NS    | Name server               | Nombre de un servidor       |
+| CNAME | Canonical name            | Alias del nombre del host   |
+| PTR   | Pointer                   | Alias para una direccion ip |
+| SRV   | Services description      | Servicios disponibles       |
+| TXT   | Text                      | Informacion de texto        |
+
+### Como funciona el DNS
+ - El usuario realizara consultas a un dominio en este caso (Example.com) Para de esta forma obtener informacion relevante, sobre dicho domonio, para poder acceder a un sitio web necesitara la ip a la cual pertenece dicho dominio, para obtener esta ip, el usuario realizara una consulta a el Local DNS Resolver, el cual revisara si la direccion ip de dicho dominio, si no es asi este le mandara una consulta a el DNS root name server, el cual hara lo mismo revisara si tiene dicha ip, si este no la tiene, devolvera a el Local DNS Resolver, una direccion para los nombres de dominios TLP.com, ahora Local DNS Resolver realizara una consulta a Top level DNS server, el cuales el que aloja los dominios .com, este devolvera el el name server que tenga dicho dominio, y por ultimo Local DNS Resolver le mandaria una consulta a Authoritative DNS server este si tendra la direccion ip a la que este asociada dicho dominio Local DNS Resolver obvtendra dicha informacion y se la dara a el usuario, asi esta pudiendo cunsultar directamente a el web server con dicha direccion ip devuelta.
