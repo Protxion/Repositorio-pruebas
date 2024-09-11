@@ -1,5 +1,7 @@
 # Kali linux 
  - Kali Linux es una distribución de Linux basada en Debian diseñada específicamente para pruebas de penetración, análisis forense digital, y seguridad informática. Es mantenida y desarrollada por Offensive Security, y es ampliamente utilizada por profesionales de ciberseguridad, investigadores, y entusiastas para evaluar la seguridad de sistemas y redes.
+# PHRACK 
+ - Es una revista con muchos articulos subidos a lo largo del tiempo respecto a la ciberseguridad
 ## Características de Kali Linux:
  - Amplia Colección de Herramientas de Seguridad: Kali Linux viene preinstalado con cientos de herramientas para realizar pruebas de penetración, auditorías de seguridad, análisis forense, ingeniería inversa, y más. Algunas de las herramientas más conocidas incluidas son:
 ### Nmap: 
@@ -250,7 +252,7 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
 ### Como usar
  - https://search.censys.io/search?resource=hosts&sort=RELEVANCE&per_page=25&virtual_hosts=EXCLUDE&q=ftp
 # Clase practica dia 3 3/09/2024
-## The harvester
+## The harvester - Usable
  - Nos petmite automatizar la busqueda, que realizamos anteriormente con google, con shodan y con censys al escribir el dominio del target y el realizar automaticamente las consultas
 ### Comandos theHarvester
  - -h, este comando nos muestra todos los comandos de theHarvester
@@ -286,7 +288,7 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  - python theHarvester.py -d microsoft.com -b google -l 100 -f Resultados2
  - python theHarvester.py -d microsoft.com -b trello -l 100 -f Resultados2
 # Clase practica dia 4 04/09/2024
-## Maltego
+## Maltego - Usable
  - nos proporciona mas flexibilidad que theHarvester, para maltego todas las consultas que hagan una query a una base de datos va a generar comandos que nos van a permitir obtener esa info, podemos recrear relaciones que hay entre un objetivo y personas correos nuemros de telefono, redes sociales, y cuallquier informacion que tengamos, permitiendonos obtener datos especificos con transformadores y asi obtener toda la informacion requerida de una persona u/o empresa
 # Clase practica dia 5 6/09/2024
 ## Recon-ng
@@ -317,7 +319,7 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  - Acceso a recursos internos de las aplicaciones web
  - Analisis de metadatos de documentos
 ## Quedan fuera las actividades con comportamiento anomalo
-## Foca analisis de metadados
+## Foca analisis de metadados - Usable 
  -  foca elevenpath site: github
  - Foca es un software que nos permite escannear archivos para conocer su metadata si tiene virus, tambien nos permite utomatizar la bsuqueda de informacion pasiva mediante google dorks, permitiendonos asi buscar informacion de forma pasiva de un objetivo y usarla para conocer contraserñas, correos, numeros de telefono, etc, es una herramienta crucial ya que permite la extraccion completa de metadatos de los archivos, foca solo se puede correr en windows.
 # Clase teorica /parctica dia 8 10/09/2024
@@ -349,3 +351,12 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
 
 ### Como funciona el DNS
  - El usuario realizara consultas a un dominio en este caso (Example.com) Para de esta forma obtener informacion relevante, sobre dicho domonio, para poder acceder a un sitio web necesitara la ip a la cual pertenece dicho dominio, para obtener esta ip, el usuario realizara una consulta a el Local DNS Resolver, el cual revisara si la direccion ip de dicho dominio, si no es asi este le mandara una consulta a el DNS root name server, el cual hara lo mismo revisara si tiene dicha ip, si este no la tiene, devolvera a el Local DNS Resolver, una direccion para los nombres de dominios TLP.com, ahora Local DNS Resolver realizara una consulta a Top level DNS server, el cuales el que aloja los dominios .com, este devolvera el el name server que tenga dicho dominio, y por ultimo Local DNS Resolver le mandaria una consulta a Authoritative DNS server este si tendra la direccion ip a la que este asociada dicho dominio Local DNS Resolver obvtendra dicha informacion y se la dara a el usuario, asi esta pudiendo cunsultar directamente a el web server con dicha direccion ip devuelta.
+# Clase practica dia 9 10/09/2024
+### Central ops-Domain Dossier
+ - Nos permite realizar busquedas a los Dominios mostrandonos informacion que nos puede ayudar para la recoleccion semi pasiva de informacion ya que nos permite obtener correos direcciones ip es una herramienta muy sencilla pero que nos puede ayudar a la hora de recolectar informacion sobre un objetivo
+### DNSDumpsster - Usable
+ - Esta herramienta esta demaciado completa ya que nos permite realizar consultas a un dominio y nos permite obtener mas informacion como geolocalizacion nos realiza un diagrama mostrandonos las relaciones que tiene ese dominio web, nos brinda informacion sobre su proveedor de internet, nos permite encontrar direcciones ip alojadas en el mismo servidor, obtener las cabeceras, saber por que name servers a pasado para poder lleegar hasta el resultado, nos permite buscar banners, y buscar los servicios. nos realiza graficos y nos permite descargar la informacion obtenida en tablas de excel
+## Sniffers
+ - son herramientas que se situan en nuestro sistema operativo que monitorean todo el trafico de red entrante y saliente. que estemos intercambiando con otros nodos de la red, nos permite visualisar los paquetes de red y el trafico de red de una manera bastante intuitiva
+ - ETH0 -> nos conecta con internet
+ - Loopback -> la interfaz del localhost
