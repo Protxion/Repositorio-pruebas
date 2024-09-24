@@ -57,6 +57,7 @@ Aprendizaje y Educación: Amplia base de uso en cursos de seguridad informática
  - unzip -> nos permite descomprimir archivos .zip
  - -h -> nos muestra todos los comandos
  - CTRL + C -> Nos permite cancelar operaciones en la terminal
+ - chmod -> se utiliza para cambiar los permisos de archivos y directorios
 
 ## Sudo
  - Permite utilizar comandos en modo superusuario
@@ -396,6 +397,8 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  - una de las formas para descargar esas maquinas virtuales fue mediante github cambiando el nombre del archivo descargado desde vagrant a una extension . zip haciendo esto 2 vveces nos permitio descargarlos sistemas operativos de una manera sencilla, rapida y gratis
 # Clase parctica dia 12 17/09/2024
 # Clase practica dia 13 20/09/2024
+# Clase practica dia 14 23/09/2024
+# Clase practica dia 15 24/09/2024
 ### DNSrecon y transferencia de zona
  - Para usar la transferencia de zona vimos una pagina la cual su dominio es zonetransfer.me, lo que queremos hacer al momento de ver la transferencia de zona es la informacion que se puede filtrar en ese tipo de ficheros, todo esto claro por mala practica de las empresas al no gestionar el servidor de manera correcta.
  - Dns recon es una app que no tiene interfaz grafikca y se maneja por medio de comandos, con las consultas correctas nos permite obtener el fichero de zona unicamente si se cumple la condicion previamente dicha y es que el servidor este mal configurado, todo este proceso tambien lo podemos hacer manual icluso desde una terminal de windows con los siguientes comandos *nslook up* *set type="ns"* *"Dominio"* *server"Servidor"* *ls -d "Dominio"*.
@@ -405,10 +408,50 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  - -t -> ponemos el tipo que deseamos que nos pase en este caso *afxr* que es el comando que solicita la transferencia de zona
 ### Nmap
  - https://nmap.org/man/es/index.html
+## Estados de los puertos
+ Estados en los que pueden encontrarse los puertos:
+
+### open
+
+ -An application is actively accepting TCP connections, UDP datagrams or SCTP associations on this port. Finding these is often the primary goal of port scanning. Security-minded people know that each open port is an avenue for attack. Attackers and pen-testers want to exploit the open ports, while administrators try to close or protect them with firewalls without thwarting legitimate users. Open ports are also interesting for non-security scans because they show services available for use on the network.
+
+### closed
+ - A closed port is accessible (it receives and responds to Nmap probe packets), but there is no application listening on it. They can be helpful in showing that a host is up on an IP address (host discovery, or ping scanning), and as part of OS detection. Because closed ports are reachable, it may be worth scanning later in case some open up. Administrators may want to consider blocking such ports with a firewall. Then they would appear in the filtered state, discussed next.
+
+### filtered
+
+ - Nmap cannot determine whether the port is open because packet filtering prevents its probes from reaching the port. The filtering could be from a dedicated firewall device, router rules, or host-based firewall software. These ports frustrate attackers because they provide so little information. Sometimes they respond with ICMP error messages such as type 3 code 13 (destination unreachable: communication administratively prohibited), but filters that simply drop probes without responding are far more common. This forces Nmap to retry several times just in case the probe was dropped due to network congestion rather than filtering. This slows down the scan dramatically.
+
+### unfiltered
+
+ - The unfiltered state means that a port is accessible, but Nmap is unable to determine whether it is open or closed. Only the ACK scan, which is used to map firewall rulesets, classifies ports into this state. Scanning unfiltered ports with other scan types such as Window scan, SYN scan, or FIN scan, may help resolve whether the port is open.
+
+### open|filtered
+
+ -Nmap places ports in this state when it is unable to determine whether a port is open or filtered. This occurs for scan types in which open ports give no response. The lack of response could also mean that a packet filter dropped the probe or any response it elicited. So Nmap does not know for sure whether the port is open or being filtered. The UDP, IP protocol, FIN, NULL, and Xmas scans classify ports this way.
+
+### closed|filtered
+
+ - This state is used when Nmap is unable to determine whether a port is closed or filtered. It is only used for the IP ID idle scan.
 #### Tecnica de descubrimiento de host
- - nmap es una herramienta sin interfaz grafica, en esta leccion nos enseñaron a hacer un host discovery el cual nos sirve para realisar un scaneo a un host previamente identificado, asi podemos saber cuantas maquinas hay conectadas a el, cuantos estan arriba, y si hay conexion con dicho host, funciona de tal manera que manda una consulta a los puertos 443 y el puerto 80, y les pregunta si tienen a alguien con la ip objetivo, tambien podemos obtener mejores resultados y ser menos intrusivos si ejecutamos esos comandos con permisos de administrador ya que la consulta se convierte en una ARP, preguntando de nuevo quien tiene dicha ip para ver quien responde, obteniendo los mismo resultados pero de una manera menos intrusiva, tambien nos permite obtener todos los host de  una infraestructura de red sin la necesidad de proporcionarle una direccion ip, con este comando -sn " Nuestra IP" /24 nos permite ver todos los host que estan abiertos lo que hace nmap es mandar Broadcast de tipo ARP a todos los nodos que le hayamos parametrisado en este caso 250 si ve que no le responde un nodo pasa al siguiente hasta que alguno le responda para luego mandar una conexion hacia el puerto 80 si consigue mandar el broadcast a un host pero este no le responde la conexion al puerto 80 nmap lo tomara como si estuviera apagado, pero no significa que este apagado simplemente puede ser que no tenga nada corriendo en el puerto 80 para poder darle respuesta. aca podemos notar la importancia de ejecutar nmap como administrador ya que depende de realizar la conexion tcp a alguno de los puertos 80 o 443, con derechos de administrador nmap nos va a mostrar aquellos host los cuales no tenemos conexion pero nos respondieron el broadcast. es importante saber que necesitamos mas si conocer todos los host los cuales dan una respuesta o solo aquellos que nos permiten una conexion, todo con el mismo comando pero unicamente añadiendo los permisos de administrador. Tambien podemos hacer un escaneo mucho mas intrusivo con el comando -PS ya que va a escanear todos los puertos de el host que nosotros le indiquemos haciendo mucho mas ruido y siendo mucho mas intrusivo, pero este comando tambien lo podemos limitar ya que el lo que intenta hacer es buscar una conexion con todos los puertos para luego escanearlos y ver cuales estan abiertos, si lo limitamos a que ingrese por un puerto y scanee ese mismo puerto o cualquier otro asi vamos a poder pasar mucho mas desapercibidos
+ - nmap es una herramienta sin interfaz grafica, en esta leccion nos enseñaron a hacer un host discovery el cual nos sirve para realisar un scaneo a un host previamente identificado, asi podemos saber cuantas maquinas hay conectadas a el, cuantos estan arriba, y si hay conexion con dicho host, funciona de tal manera que manda una consulta a los puertos 443 y el puerto 80, y les pregunta si tienen a alguien con la ip objetivo, tambien podemos obtener mejores resultados y ser menos intrusivos si ejecutamos esos comandos con permisos de administrador ya que la consulta se convierte en una ARP, preguntando de nuevo quien tiene dicha ip para ver quien responde, obteniendo los mismo resultados pero de una manera menos intrusiva, tambien nos permite obtener todos los host de  una infraestructura de red sin la necesidad de proporcionarle una direccion ip, con este comando -sn " Nuestra IP" /24 nos permite ver todos los host que estan abiertos lo que hace nmap es mandar Broadcast de tipo ARP a todos los nodos que le hayamos parametrisado en este caso 250 si ve que no le responde un nodo pasa al siguiente hasta que alguno le responda para luego mandar una conexion hacia el puerto 80 si consigue mandar el broadcast a un host pero este no le responde la conexion al puerto 80 nmap lo tomara como si estuviera apagado, pero no significa que este apagado simplemente puede ser que no tenga nada corriendo en el puerto 80 para poder darle respuesta. aca podemos notar la importancia de ejecutar nmap como administrador ya que depende de realizar la conexion tcp a alguno de los puertos 80 o 443, con derechos de administrador nmap nos va a mostrar aquellos host los cuales no tenemos conexion pero nos respondieron el broadcast. es importante saber que necesitamos mas si conocer todos los host, los cuales dan una respuesta o solo aquellos que nos permiten una conexion, todo con el mismo comando pero unicamente añadiendo los permisos de administrador. Tambien podemos hacer un escaneo mucho mas intrusivo con el comando -PS ya que va a escanear todos los puertos de el host que nosotros le indiquemos haciendo mucho mas ruido y siendo mucho mas intrusivo, pero este comando tambien lo podemos limitar ya que el lo que intenta hacer es buscar una conexion con todos los puertos para luego escanearlos y ver cuales estan abiertos, si lo limitamos a que ingrese por un puerto y scanee ese mismo puerto o cualquier otro asi vamos a poder pasar mucho mas desapercibidos
+#### Escaneo de puertos
+ - Nmap tambien nos permite el escaneo de puertos con el uso del comando -sS nmap lo que va a hacer es preguntar si alguien tiene el host que le indicamos luego comenzara a mandar onexiones de tipo TCP a todos los puertos para asi podernos mostrar a nosotros que puertos estan abiertos y el tipo de tarea que esta ejecutando en ese puerto, Tambien nos permite escanear todos los host que le parametricemos al quitar la direccion del host y poner en su lugar 0/24 o parametrisar de donde a donde quieres realizar el escaneo de hosts parametrizando desde un numero de host a otro *Ejemplo:* 125-135 asi comenzara a esncanear todos los host que le den una respuesta y comenzara a realizar las consultas TCP para revisar todos sus puertos, o los que le hayamos parametrisado, este comando solo se puede ejecutar como administrador.
+#### Descubrimiento de servicios
+ - Vimos como nmap con este comando -sV nos ayuda a descubir cuales son los servicios que estan corriendo dentro de los puertos que esten abiertos, nos ayuda a descartar el script base de nmap donde supone el tipo de servicio que esta corriendo en dicho puerto, y nos revela cual es el servicio y su version.
+#### Descubrimiento de sistema operativo
+ - En esta seccion vimos como nmap con el comando -O es capaz de Descubrir o tener idea de que sistema operativo usa el objetivo, lo hace escaneando diferentes servicios que estan corriendo para asi tener una idea de cual es el sistema operativo
 ### Comandos Nmap
  - -sn -> Nos permite realizar un escaneo de los puertos 80 y 443
+ - -v -> Nos permite obtener mas informacion al momento de obtener los resultados
+ - -reason -> Nos muestra la razon por la cual el puerto esta cerrado o abierto
+ - -oX -> Nos permite exportar los datos obtenidos a un archivo ejemplo XML
+ - stylesheet -> Nos permite insertarle una hoja de estilos al archivo creado
+ - -sV -> Nos permite realizar el descubrimiento de servicios que corren dentro de un puerto abierto
+ - -O -> Nos permite obtener informacion del sistema operativo
+#### -sS
+ - -sS "IP" -> Va a escanear todos los puertos y va a mostrar cuales estan abiertos
+ - -sS "IP" -p "Puerto" -> Va a centrarse en el puerto que le indiquemos 
 #### -PS 
  - -PS"Puertos por los cuales va a probar la conexion" "IP"
  - -PS "IP" -p "Puertos a los cuales va a escanear para comprobar si estan abiertos"
@@ -417,3 +460,9 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  - -PS 192.168.157.128 -p 80
  - -PS21,22,23,24 192.168.157.128 -p 21
  - -PS21,22,23,24 192.168.157.0/24 -p 21
+ - sudo nmap -v --reason -sS -oX puertos.xml --stylesheet="https://svn.nmap.org/nmap/docs/nmap.xsl"  192.168.157.125-135
+ - sudo nmap -sS 192.168.157.125-135
+ - sudo nmap -sS 192.168.157.0/24
+ - sudo nmap -sS 192.168.157.128 -p 80
+ - sudo nmap -v --reason -sV -oX servicios.xml --stylesheet="https://svn.nmap.org/nmap/docs/nmap.xsl"  192.168.157.125-135
+ - sudo nmap -v -O 192.168.157.128
