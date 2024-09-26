@@ -399,6 +399,7 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
 # Clase practica dia 13 20/09/2024
 # Clase practica dia 14 23/09/2024
 # Clase practica dia 15 24/09/2024
+# Clase practica dia 16 26/09/2024
 ### DNSrecon y transferencia de zona
  - Para usar la transferencia de zona vimos una pagina la cual su dominio es zonetransfer.me, lo que queremos hacer al momento de ver la transferencia de zona es la informacion que se puede filtrar en ese tipo de ficheros, todo esto claro por mala practica de las empresas al no gestionar el servidor de manera correcta.
  - Dns recon es una app que no tiene interfaz grafikca y se maneja por medio de comandos, con las consultas correctas nos permite obtener el fichero de zona unicamente si se cumple la condicion previamente dicha y es que el servidor este mal configurado, todo este proceso tambien lo podemos hacer manual icluso desde una terminal de windows con los siguientes comandos *nslook up* *set type="ns"* *"Dominio"* *server"Servidor"* *ls -d "Dominio"*.
@@ -441,6 +442,18 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  - Vimos como nmap con este comando -sV nos ayuda a descubir cuales son los servicios que estan corriendo dentro de los puertos que esten abiertos, nos ayuda a descartar el script base de nmap donde supone el tipo de servicio que esta corriendo en dicho puerto, y nos revela cual es el servicio y su version.
 #### Descubrimiento de sistema operativo
  - En esta seccion vimos como nmap con el comando -O es capaz de Descubrir o tener idea de que sistema operativo usa el objetivo, lo hace escaneando diferentes servicios que estan corriendo para asi tener una idea de cual es el sistema operativo
+#### nmap con el protocolo SMB
+ - los scripts en nmap nos ayudan a usar ciertas herramientas que nmap trae por defecto que ya tienen tareas automatizadas, estos scripts los encontramos en /usr/share/nmap/scripts, 
+#### Scripts SMB
+ - --script=smb-os-discovery -> este script nos permite descubrir el sistema operativo que tiene nuestro objetivo
+ - --script=smb-enum-shares -> este script nos permite ver las carpetas que esta compartiendo y si tiene acceso o no a ella
+#### nmap con el protocolo SNMP
+ - el protocolo snmp es uno de los protocolos mas importantes en la ciberseguridad ya que comun mente se deja abierto al momento de crear servidores y por alli podemos obtener informacion valiosa, este siempre esta en el puerto 161 el cual funciona por udp 
+#### Scripts SNMP
+ - --script=snmp-win32-software -> Nos muestra los programas que hay instalados en el objetivo con sus versiones
+ - --script=snmp-win32-users -> Nos muestra todos los usuarios que hay dentro de el objetivo
+ - --script=snmp-processes -> Nos muestra todos los procesos que estan corriendo en el objetivo
+ - --script=snmp-netstat -> Nos muestra todas las conexiones que estan corriendo en el objetivo
 ### Comandos Nmap
  - -sn -> Nos permite realizar un escaneo de los puertos 80 y 443
  - -v -> Nos permite obtener mas informacion al momento de obtener los resultados
@@ -449,6 +462,7 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  - stylesheet -> Nos permite insertarle una hoja de estilos al archivo creado
  - -sV -> Nos permite realizar el descubrimiento de servicios que corren dentro de un puerto abierto
  - -O -> Nos permite obtener informacion del sistema operativo
+ - --script -> Nos permite usar los scripts que tiene nmap
 #### -sS
  - -sS "IP" -> Va a escanear todos los puertos y va a mostrar cuales estan abiertos
  - -sS "IP" -p "Puerto" -> Va a centrarse en el puerto que le indiquemos 
@@ -466,3 +480,13 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  - sudo nmap -sS 192.168.157.128 -p 80
  - sudo nmap -v --reason -sV -oX servicios.xml --stylesheet="https://svn.nmap.org/nmap/docs/nmap.xsl"  192.168.157.125-135
  - sudo nmap -v -O 192.168.157.128
+ - sudo nmap -v -sS -p 139,445 192.168.157.129
+ - sudo nmap -v -sS -p 139,445 --script=smb-os-discovery 192.168.157.129
+ - sudo nmap -v -sU -p 161 --script=snmp-win32-software 192.168.157.129
+ - sudo nmap -v -sU -p 161 --script=snmp-win32-users 192.168.157.129
+ - sudo nmap -v -sU -p 161 --script=snmp-processes 192.168.157.129
+ - sudo nmap -v -sU -p 161 --script=snmp-netstat 192.168.157.129
+# Fin de la recopilacion activa de informacion
+
+
+
