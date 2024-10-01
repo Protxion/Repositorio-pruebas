@@ -487,6 +487,14 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  - sudo nmap -v -sU -p 161 --script=snmp-processes 192.168.157.129
  - sudo nmap -v -sU -p 161 --script=snmp-netstat 192.168.157.129
 # Fin de la recopilacion activa de informacion
-
-
+# Clase teorico practica dia 17 01/10/2024
+## Analisis de vulnerabilidades    
+ - Esta fase consistew en la identificacion de fallos de seguridad que se encuentren presentes en los sistemas que se estan evaluando
+ - el tipo de fallos abarca desde errores en la configuracion de un servicio hasta vulnerabilidades en determinados servicios que sean publicos y puedan comprometer la integridad del mismo
+#### Links y ayudas
+ - https://cve.mitre.org/cve/search_cve_list.html
+ - nvd.nist.gov/vuln/search/
+ - https://www.cvedetails.com/vulnerability-search.php
+###  CVE, CVSS, CPE - Common Vulnerabilities and Exposures
+ - En esta clase vimos como buscar y clasificar de manera sencilla las vulnerabilidaddes que habiamos encontrado anteriormente con las recopilaciones de informacion, con diferentes sitios web que tienen repositorios sobre dichas vulnerabilidades, su nivel de complejidad y nos podrian ayudar a encontrar exploits que nos ayuden a exlotarlas  
 
