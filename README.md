@@ -716,16 +716,16 @@ Estados en los que pueden encontrarse los puertos:
 ### Pholymorph
  - Nos permite modificar los paquetes de red mientras se están enviando, lo que hace es capturar los paquetes de red, generando una plantilla para así ejecutar comandos de Python y modificar su contenido a nuestra conveniencia. También nos permite hacer spoofing, creando funciones con Python, las cuales se ejecutarán secuencialmente al momento de interceptar paquetes.
 #### Comandos 
- - `spoof` - Permite realizar spoofing a la IP objetivo.
- - `-t` - La IP objetivo.
- - `-g` - Es el gateway.
- - `capture` - Polymorph se pone a capturar todos los paquetes que pasen por él.
- - `-f` - Nos permite colocar un filtro.
- - `show` - Nos muestra la información.
- - `wireshark` - Nos permite usar Wireshark para visualizar mejor los paquetes capturados.
- - `template` - Nos permite seleccionar el paquete que queramos.
- - `intercept` - Comienza a interceptar los paquetes.
- - `functions` - Nos permite añadir una función.
+ - `spoof` -> Permite realizar spoofing a la IP objetivo.
+ - `-t` -> La IP objetivo.
+ - `-g` -> Es el gateway.
+ - `capture` -> Polymorph se pone a capturar todos los paquetes que pasen por él.
+ - `-f` -> Nos permite colocar un filtro.
+ - `show` -> Nos muestra la información.
+ - `wireshark` -> Nos permite usar Wireshark para visualizar mejor los paquetes capturados.
+ - `template` -> Nos permite seleccionar el paquete que queramos.
+ - `intercept` -> Comienza a interceptar los paquetes.
+ - `functions` -> Nos permite añadir una función.
 #### Ejemplos
  - `spoof -t "IP objetivo" -g "Gateway"`
  - `capture -f icmp`
@@ -748,9 +748,9 @@ Estados en los que pueden encontrarse los puertos:
 ### John the Ripper
  - Para usar John, tendremos que conocer el formato en el cual está la contraseña. Utiliza un diccionario de palabras para hashear y adivinar la contraseña correcta.
 #### Comandos 
- - `--format` - Nos permite colocar el formato de contraseñas hasheadas.
- - `--worldlist` - Nos permite cambiar el diccionario que usa por defecto.
- - `--show` - Nos muestra las contraseñas que haya encontrado.
+ - `--format` -> Nos permite colocar el formato de contraseñas hasheadas.
+ - `--worldlist` -> Nos permite cambiar el diccionario que usa por defecto.
+ - `--show` -> Nos muestra las contraseñas que haya encontrado.
 #### Ejemplos
  - `--format=raw-md5 --worldlist=/usr/share/worldlist/rockyou.txt hash.md5`
  - `--format=raw-md5 hash.md5 --show`
@@ -760,8 +760,8 @@ Estados en los que pueden encontrarse los puertos:
 ### Hashcat
  - Es otro programa capaz de crackear contraseñas igual que John the Ripper, pero tiene ciertas diferencias. Al permitirnos seleccionar la técnica de ataque, podremos usar diferentes métodos, como fuerza bruta y otras técnicas.
 #### Comandos 
- - `-m` - Nos permite colocar el formato en el cual están hasheadas las contraseñas.
- - `-a` - Nos permite seleccionar la técnica que queramos utilizar.
+ - `-m` -> Nos permite colocar el formato en el cual están hasheadas las contraseñas.
+ - `-a` -> Nos permite seleccionar la técnica que queramos utilizar.
 #### Ejemplos 
  - `hashcat -m 0 -a 0 hash.md5 /usr/share/worldlist/rockyou.txt`
  - `hashcat -m 0 -a 0 hash.md5 /usr/share/worldlist/rockyou.txt --show`
@@ -776,8 +776,8 @@ Estados en los que pueden encontrarse los puertos:
 ### Borrado de evidencias
  - Se basa en borrar cualquier rastro que podamos haber dejado dentro del sistema operativo objetivo, para que si un forense llega a revisar el disco duro, no pueda encontrar nada que nos pueda incriminar.
 #### En Linux
- - `shred` - Es la herramienta que nos enseñaron para Linux, esta herramienta incluso viene preinstalada en sistemas operativos Linux.
- - `srm` - Borra un fichero de manera segura, sobreescribe varias veces dicho archivo.
+ - `shred` -> Es la herramienta que nos enseñaron para Linux, esta herramienta incluso viene preinstalada en sistemas operativos Linux.
+ - `srm` -> Borra un fichero de manera segura, sobreescribe varias veces dicho archivo.
 #### En Windows
  - `meterpreter` - Con el comando `run post/windows/manage/sdel File=c:\\users\\User\\Desktop\\Nombrearchivo` va a sobreescribir el archivo que hayamos seleccionado, eliminándolo de forma segura.
 
